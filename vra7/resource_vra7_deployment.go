@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform/helper/schema"
 	logging "github.com/op/go-logging"
-	"github.com/terraform-providers/terraform-provider-vra7/sdk"
+	"github.com/sky-philipalmeida/terraform-provider-vra7-1/sdk"
 	"github.com/terraform-providers/terraform-provider-vra7/utils"
 )
 
@@ -356,7 +356,7 @@ func resourceVra7DeploymentRead(d *schema.ResourceData, meta interface{}) error 
 			resourceDataMap[resourceData.Component] = dataVals
 			dataVals[sdk.MachineCPU] = resourceData.CPU
 			dataVals[sdk.MachineStorage] = resourceData.Storage
-			dataVals[sdk.IPAddress] = resourceData.IPAddress
+			dataVals[sdk.IPAddress] = resourceData.IPAddress ?  resourceData.IPAddress : resourceData.CollectedIPAddress
 			dataVals[sdk.MachineMemory] = resourceData.Memory
 			dataVals[sdk.MachineName] = resourceData.MachineName
 			dataVals[sdk.MachineGuestOs] = resourceData.MachineGuestOperatingSystem
@@ -375,6 +375,12 @@ func resourceVra7DeploymentRead(d *schema.ResourceData, meta interface{}) error 
 				dataVals[networkIndexName+".MACAddress"] = netDetails.NetworkAddressInfo.MACAddress
 				dataVals[networkIndexName+".Name"] = netDetails.NetworkAddressInfo.Name
 			}
+			// // Fallback IPAddress to first IP on NetworkList
+			// if resourceData.IPAddress == "" && len(resourceData.Networks) > 0 {
+			// 	dataVals[sdk.IPAddress] = resourceData.Networks[0].NetworkAddressInfo.IPAddress
+			// } else {
+			// 	dataVals[sdk.IPAddress] = resourceData.IPAddress
+			// }
 
 		}
 	}

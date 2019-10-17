@@ -88,6 +88,7 @@ type DeploymentResourceData struct {
 	ChangeOwner                 bool        `json:"ChangeOwner,omitempty"`
 	CreateSnapshot              bool        `json:"CreateSnapshot,omitempty"`
 	Networks                    []NWDetails `json:"NETWORK_LIST,omitempty"`
+	CollectedIPAddress          string      `json:"__datacollected_ipaddress,omitempty"`
 }
 
 //Networks Related structs

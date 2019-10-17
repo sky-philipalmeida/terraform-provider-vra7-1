@@ -32,6 +32,7 @@ const (
 	MachineStorage         = "storage"
 	MachineMemory          = "memory"
 	IPAddress              = "ip_address"
+	CollectedIPAddress     = "__datacollected_ipaddress"
 	MachineName            = "name"
 	MachineGuestOs         = "guest_operating_system"
 	MachineBpName          = "blueprint_name"
